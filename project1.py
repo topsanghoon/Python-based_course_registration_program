@@ -1,6 +1,19 @@
 """ project 1"""
 #import numpy as np
 
+class course:
+    def __init__(self):
+        data = []
+        file = open("D:/vscode/first/project/basics.txt", "r")     
+        for line in file:
+            row = line.strip().split('\t')    #row = [item0, item2, item3, ... ]
+            data.append(row)    #1차원 배열인 row를 2차원 배열 data로 변환
+
+        arr2d = np.array(data)   # NumPy 배열로 변환합니다.
+        
+        file.close()
+        print(arr2d) # 결과를 출력합니다.
+
 def load_user_list():
     user_list = []
     with open("user_list.txt", "r") as file:
