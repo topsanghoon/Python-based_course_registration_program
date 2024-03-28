@@ -1,78 +1,91 @@
 """ project 1"""
-import numpy as np
+#import numpy as np
 
+def load_user_list():
+    user_list = []
+    with open("user_list.txt", "r") as file:
+        for line in file:
+            id_, password = line.strip().split("/")
+            user_list.append((id_, password))
+    return user_list
+
+# 로그인 구현부
 def login():
     while True:
-        print("\n================Log in================")
+        print("\n" + " Log in ".center(40, '='))
         id_input = input("ID: ")
         password_input = input("Password: ")
         
-        if id_input == "root" and password_input == "12345678":
+        if id_input == "root" and password_input == "12345678": # 관리자 계정 확인
             return "root"
         
-        with open("user_list.txt", "r") as file:
-            for line in file:
-                id_, password = line.strip().split("/")
-                if id_ == id_input and password == password_input:
-                    return "user"
+        user_list = load_user_list()
+        for id_, password in user_list:
+            if id_ == id_input and password == password_input:
+                return "user"
         print("**Wrong password. try again.**")
 
 
+# 계정 생성 구현부
 def create_account():
-    print("\n================sign up================")
+    print("\n" + " sign up ".center(40, '='))
     while True:
         new_id = input("ID : ")
-        with open("user_list.txt", "r") as file:
-            for line in file:
-                id_, _ = line.strip().split("/")
-                if id_ == new_id:
-                    print("**already exists**")
-                    break
-            else:    
-                print("Password must be 8 to 12 characters long \nand contain at least one uppercase letter, \nlowercase letter, and number.")            
-                while True:
-                    new_password = input("Password: ")
-                    violations = []
-                    if len(new_password) < 8 or len(new_password) > 12:
-                        violations.append("enter within 8 to 12 characters.")
-                    if not any(char.isupper() for char in new_password):
-                        violations.append("include at least one capital letter.")
-                    if not any(char.islower() for char in new_password):
-                        violations.append("include at least one lowercase letter.")
-                    if not any(char.isdigit() for char in new_password):
-                        violations.append("include at least one number.")
+        user_list = load_user_list()
+        for id_, _ in user_list:
+            if id_ == new_id:
+                print("**already exists**")
+                break
+        else:
+            print(" Password Rule ".center(40, ' '))
+            print("Password must be 8 to 12 characters long \nand contain at least one uppercase letter, \nlowercase letter, and number.")            
+            while True:
+                new_password = input("\nPassword: ")
+                violations = []
+                if len(new_password) < 8 or len(new_password) > 12:
+                    violations.append("enter within 8 to 12 characters.")
+                if not any(char.isupper() for char in new_password):
+                    violations.append("include at least one capital letter.")
+                if not any(char.islower() for char in new_password):
+                    violations.append("include at least one lowercase letter.")
+                if not any(char.isdigit() for char in new_password):
+                    violations.append("include at least one number.")
 
-                    if violations:
-                        print("You Must")
-                        for violation in violations:
-                            print("-", violation)
+                if violations:
+                    print("\n**You Must**")
+                    for violation in violations:
+                        print("-", violation)
+                else:
+                    confirm_password = input("Please enter your password again: ")
+                    if new_password != confirm_password:
+                        print("**Passwords do not match. Please try again.**")
                     else:
                         with open("user_list.txt", "a") as file:
                             file.write(f"{new_id}/{new_password}\n")
-                        print("계정이 성공적으로 생성되었습니다.")
+                        print("Account successfully created.")
                         return
 
 
 def main():
     while True:
-        print("================================")
-        print("\n1. Login\n2. Sign up\n3. exit")
+        print("\n" + " Menu ".center(40,'='))
+        print("1. Login\n2. Sign up\n3. exit")
         choice = input("select: ")
 
         if choice == "1":
             user_type = login()
             if user_type == "root":
-                print("Login as root")
-                # 관리자 기능 실행
+                print("-Login as root-")
+                # 관리자 기능 실행 // 이거를 이제 return 받지 않고 그냥 login 함수에서 즉시 함수 호출해서 실행
             elif user_type == "user":
-                print("Login as user")
-                # 사용자 기능 실행
+                print("-Login as user-")
+                # 사용자 기능 실행 //이것도 마찬가지
 
         elif choice == "2":
             create_account()
 
         elif choice == "3":
-            print("exit program.")
+            print("-exit program-")
             break
 
         else:
