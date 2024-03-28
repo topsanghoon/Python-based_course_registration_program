@@ -1,6 +1,7 @@
 """ project 1"""
 #import numpy as np
 
+#############
 class course:
     def __init__(self):
         data = []
@@ -13,6 +14,7 @@ class course:
         
         file.close()
         print(arr2d) # 결과를 출력합니다.
+##############
 
 def load_user_list():
     user_list = []
