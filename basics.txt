@@ -1,0 +1,11 @@
+100	LogicCircuit	Required	3	Wed#B1#Fri#B1	Woncheon#535
+101	CapstoneDesign1	Required	2	Fri#F4	Woncheon#538
+102	DataStructure	Required	3	Mon#C1#Thu#C1	Woncheon#340
+104	CircuitTheory	Required	3	Wed#B1#Thu#D1	Woncheon#535
+105	DigitalSystemDesign	Elective	3	Tue#E1#Thu#E1	Woncheon#228
+108	EmbeddedSystemDesign	Elective	3	Wed#D1#Fri#D1	Woncheon#538
+109	SignalsSystems	Required	3	Tue#A1#Thu#D1	Woncheon#535
+110	ElectronicCircuit1	Required	3	Mon#C1#Wed#C1	Woncheon#340
+111	Eelctromagnetics	Required	3	Mon#A1#Thu#D1	Woncheon#539
+112	BasicLab	Required	2	Fri#F4	Woncheon#334
+113	Robotics	Elective	3	Mon#B1#Wed#C1	Woncheon#538
