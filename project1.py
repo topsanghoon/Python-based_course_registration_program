@@ -1,5 +1,5 @@
 """ project 1"""
-#import numpy as np
+import numpy as np
 
 def login():
     while True:
