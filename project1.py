@@ -1,11 +1,16 @@
 """ project 1"""
-#import numpy as np
+import numpy as np
+import os
 
+current_file_path = os.path.realpath(__file__)  # 현재 작업 디렉토리 얻기
+parent_directory = os.path.dirname(current_file_path)  # 부모 디렉토리 얻기
+
+    
 #############
 class course:
     def __init__(self):
         data = []
-        file = open("D:/vscode/first/project/basics.txt", "r")     
+        file = open(parent_directory + "\\basics.txt", "r")     
         for line in file:
             row = line.strip().split('\t')    #row = [item0, item2, item3, ... ]
             data.append(row)    #1차원 배열인 row를 2차원 배열 data로 변환
@@ -18,7 +23,7 @@ class course:
 
 def load_user_list():
     user_list = []
-    with open("user_list.txt", "r") as file:
+    with open(parent_directory + "\\user_list.txt", "r") as file:
         for line in file:
             id_, password = line.strip().split("/")
             user_list.append((id_, password))
@@ -75,13 +80,14 @@ def create_account():
                     if new_password != confirm_password:
                         print("**Passwords do not match. Please try again.**")
                     else:
-                        with open("user_list.txt", "a") as file:
+                        with open(parent_directory + "\\user_list.txt", "a") as file:
                             file.write(f"{new_id}/{new_password}\n")
                         print("Account successfully created.")
                         return
 
 
 def main():
+
     while True:
         print("\n" + " Menu ".center(40,'='))
         print("1. Login\n2. Sign up\n3. exit")
